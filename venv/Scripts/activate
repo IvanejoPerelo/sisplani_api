@@ -35,7 +35,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\APIsisplani\venv"
+VIRTUAL_ENV="C:\Users\IvanPL\Documents\codigo-15\APIsisplani\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
