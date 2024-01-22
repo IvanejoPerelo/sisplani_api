@@ -1,9 +1,9 @@
 from .models import Afp
-from .serializers import AportacionesViewSet
+from .serializers import AfpViewSet
 from rest_framework.viewsets import ModelViewSet
 # from rest_framework.permissions import IsAuthenticated
 
-class AportacionesViewSet(ModelViewSet):
+class AfpViewSet(ModelViewSet):
     queryset = Afp.objects.all()
-    serializer_class = AportacionesViewSet
+    serializer_class = AfpViewSet
     # permission_classes = [IsAuthenticated]
