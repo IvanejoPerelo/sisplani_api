@@ -1,7 +1,9 @@
-from django.http import JsonResponse;
+from .models import Descuentos
+from .serializers import DescuentosViewSet
+from rest_framework.viewsets import ModelViewSet
+# from rest_framework.permissions import IsAuthenticated
 
-def index(request):
-    return JsonResponse({
-        "ok": True,
-        "data": "Hola Mundo"
-    })
+class DescuentosViewSet(ModelViewSet):
+    queryset = Descuentos.objects.all()
+    serializer_class = DescuentosViewSet
+    # permission_classes = [IsAuthenticated]
