@@ -13,6 +13,7 @@ class Empleados(models.Model):
     fecha_ingreso=models.DateField()
     remuneracion = models.FloatField()
     estado = models.CharField(max_length=10)
+    is_active = models.BooleanField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

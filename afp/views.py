@@ -1,7 +1,9 @@
-from django.http import JsonResponse;
+from .models import Afp
+from .serializers import AfpViewSet
+from rest_framework.viewsets import ModelViewSet
+# from rest_framework.permissions import IsAuthenticated
 
-def index(request):
-    return JsonResponse({
-        "ok": True,
-        "data": "Hola Mundo"
-    })
+class AfpViewSet(ModelViewSet):
+    queryset = Afp.objects.all()
+    serializer_class = AfpViewSet
+    # permission_classes = [IsAuthenticated]
