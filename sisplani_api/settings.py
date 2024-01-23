@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'aportaciones',
     'descuentos',
     'empleados',
+    'planillas'
 ]
 
 MIDDLEWARE = [
