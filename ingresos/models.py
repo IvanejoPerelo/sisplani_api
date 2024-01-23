@@ -1,11 +1,11 @@
 from django.db import models
 from planillas.models import DetallePlanillas
 
-class Descuentos(models.Model):
-    nombre = models.CharField(max_length=50)
+class Ingresos(models.Model):
+    nombre=models.CharField(max_length=50)
     descripcion = models.TextField(null=True)
-    tipo = models.CharField(max_length=10)
-    monto = models.FloatField()
+    periodo=models.PositiveIntegerField()
+    monto=models.FloatField
     detallePlanilla = models.ForeignKey(DetallePlanillas, on_delete=models.CASCADE, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -14,4 +14,4 @@ class Descuentos(models.Model):
         return self.nombre
     
     class Meta():
-        db_table = "descuentos"
+        db_table = "ingresos"
