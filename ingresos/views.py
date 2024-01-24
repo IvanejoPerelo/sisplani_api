@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from .models import Ingresos
+from .serializers import IngresosSerializer
+from rest_framework.viewsets import ModelViewSet
 
-# Create your views here.
+class IngresosViewSet(ModelViewSet):
+    queryset = Ingresos.objects.all()
+    serializer_class = IngresosSerializer
