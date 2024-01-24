@@ -1,7 +1,7 @@
-from django.http import JsonResponse;
+from .serializers import EmpleleadosSerializer
+from .models import Empleados
+from rest_framework.viewsets import ModelViewSet
 
-def index(request):
-    return JsonResponse({
-        "ok": True,
-        "data": "Hola Mundo"
-    })
+class EmpleeadosViewSet(ModelViewSet):
+    queryset = Empleados.objects.all()
+    serializer_class = EmpleleadosSerializer
