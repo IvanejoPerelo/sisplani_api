@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'ingresos',
     'planillas',
     'user',
+    'valores',
 ]
 
 MIDDLEWARE = [

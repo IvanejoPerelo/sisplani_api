@@ -12,4 +12,5 @@ urlpatterns = [
     path(api_version, include("ingresos.urls")),
     path(api_version, include("planillas.urls")),
     path(api_version, include("user.urls")),
+    path(api_version, include("valores.urls")),
 ]

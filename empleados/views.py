@@ -1,7 +1,7 @@
-from .serializers import EmpleleadosSerializer
+from .serializers import EmpleadosSerializer
 from .models import Empleados
 from rest_framework.viewsets import ModelViewSet
 
-class EmpleeadosViewSet(ModelViewSet):
+class EmpleadosViewSet(ModelViewSet):
     queryset = Empleados.objects.all()
-    serializer_class = EmpleleadosSerializer
+    serializer_class = EmpleadosSerializer
