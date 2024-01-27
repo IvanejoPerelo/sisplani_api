@@ -31,6 +31,7 @@ class CalculatePlanilla(APIView):
 
         for detalle in detalles:
             detalle_serializer = DetallePlanillasSerializer(detalle).data
+            #print (detalle_serializer)
             empleado = EmpleadosSerializer(Empleados.objects.get(
                 pk=detalle_serializer["empleado"])).data
             
@@ -65,7 +66,7 @@ class CalculatePlanilla(APIView):
 
             for valor in detalle_serializer["valores"]:
                 valor_data = ValoresSerializer(Valores.objects.get(pk=valor))
-                print("valor_monto:", valor_data["monto"].value) 
+                #Sprint("valor_monto:", valor_data["monto"].value) 
                 
                 if (valor_data["tipo"].value == 1):
                     total_ingresos += valor_data["monto"].value
@@ -74,7 +75,6 @@ class CalculatePlanilla(APIView):
                         "nombre":valor_data["nombre"],
                         "monto":valor_data["monto"]
                     })
-                    print (ingresos)
 
                 if (valor_data["tipo"].value == 2):
                     total_descuentos += valor_data["monto"].value
@@ -82,8 +82,7 @@ class CalculatePlanilla(APIView):
                     descuentos.append({
                         "nombre":valor_data["nombre"],
                         "monto":valor_data["monto"]
-                    })
-                    print (descuentos)                   
+                    })                
                 
                 if (valor_data["tipo"].value == 3):
                     aportacion = valor_data["monto"].value * empleado["remuneracion"]
@@ -99,15 +98,15 @@ class CalculatePlanilla(APIView):
             else:
                 base_aportacion = sueldo_bruto
 
-            calculo_aportes = sueldo_bruto * afp_elegido["tasaAportes"]
-            calculo_seguro = sueldo_bruto * afp_elegido["tasaSeguros"]         
-            calculo_comision = sueldo_bruto * afp_elegido["tasaComisionVariable"]         
+            calculo_aportes = base_aportacion * afp_elegido["tasaAportes"]
+            calculo_seguro = base_aportacion * afp_elegido["tasaSeguros"]         
+            calculo_comision = base_aportacion * afp_elegido["tasaComisionVariable"]         
             total_afp = calculo_aportes + calculo_seguro + calculo_comision
             sueldo_neto = sueldo_bruto - total_descuentos - total_afp
 
             empleados.append({
                 "empleado": empleado,
-                "remuneración": remuneracion,
+                "remuneracion": remuneracion,
                 "total_ingresos": total_ingresos,
                 "sueldo_bruto": sueldo_bruto,   
                 "aportacion": aportacion,            
@@ -119,8 +118,24 @@ class CalculatePlanilla(APIView):
                 "sueldo_neto": sueldo_neto
             })
 
+        suma_remuneracion=0
+        suma_total_ingresos = 0
+        suma_sueldo_bruto = 0
+        suma_total_descuentos =0
+        suma_total_afp = 0
+        suma_sueldo_neto = 0
+
+        for items in empleados:
+            suma_remuneracion += items["remuneracion"]
+            suma_total_ingresos += items["total_ingresos"]
+            suma_sueldo_bruto += items["sueldo_bruto"]
+            suma_total_descuentos += items["total_descuentos"]
+            suma_total_afp +=items["total_afp"]
+            suma_sueldo_neto +=items["sueldo_neto"]
+
 
         return Response({
             "ok": True,
-            "planilla": empleados,
+            "data": empleados,
         })
+    
